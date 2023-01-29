@@ -6,16 +6,26 @@ interface StatisticsProps {
 	bad: number;
 }
 
-const Statistics = ({ good, neutral, bad }: StatisticsProps) => (
-	<div>
-		<h1>statistics</h1>
-		<p>good {good}</p>
-		<p>neutral {neutral}</p>
-		<p>bad {bad}</p>
-		<p>average: {(good - bad) / (good + neutral + bad)}</p>
-		<p>positive: {(good * 100) / (good + neutral + bad)}%</p>
-	</div>
-);
+const Statistics = ({ good, neutral, bad }: StatisticsProps) => {
+	return (
+		<div>
+			<h1>statistics</h1>
+			{good + neutral + bad > 0 ? (
+				<>
+					<p>good {good}</p>
+					<p>neutral {neutral}</p>
+					<p>bad {bad}</p>
+					<p>average: {(good - bad) / (good + neutral + bad)}</p>
+					<p>positive: {(good * 100) / (good + neutral + bad)}%</p>
+				</>
+			) : (
+				<>
+					<p>No feedback given</p>
+				</>
+			)}
+		</div>
+	);
+};
 
 const App = () => {
 	// save clicks of each button to its own state
