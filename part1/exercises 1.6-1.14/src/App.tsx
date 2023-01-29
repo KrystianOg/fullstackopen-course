@@ -11,13 +11,15 @@ const Statistics = ({ good, neutral, bad }: StatisticsProps) => {
 		<div>
 			<h1>statistics</h1>
 			{good + neutral + bad > 0 ? (
-				<>
-					<StatisticLine text="good" value={good} />
-					<StatisticLine text="neutral" value={neutral} />
-					<StatisticLine text="bad" value={bad} />
-					<StatisticLine text="average" value={(good - bad) / (good + neutral + bad)} />
-					<StatisticLine text="positive" value={(good * 100) / (good + neutral + bad)} modifier="%" />
-				</>
+				<table>
+					<tbody>
+						<StatisticLine text="good" value={good} />
+						<StatisticLine text="neutral" value={neutral} />
+						<StatisticLine text="bad" value={bad} />
+						<StatisticLine text="average" value={(good - bad) / (good + neutral + bad)} />
+						<StatisticLine text="positive" value={(good * 100) / (good + neutral + bad)} modifier="%" />
+					</tbody>
+				</table>
 			) : (
 				<>
 					<p>No feedback given</p>
@@ -41,10 +43,13 @@ interface StatisticLineProps {
 }
 
 const StatisticLine = ({ text, value, modifier }: StatisticLineProps) => (
-	<p>
-		{text} {value}
-		{modifier}
-	</p>
+	<tr>
+		<td>{text}</td>
+		<td>
+			{value}
+			{modifier}
+		</td>
+	</tr>
 );
 
 const App = () => {
