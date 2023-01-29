@@ -12,11 +12,11 @@ const Statistics = ({ good, neutral, bad }: StatisticsProps) => {
 			<h1>statistics</h1>
 			{good + neutral + bad > 0 ? (
 				<>
-					<p>good {good}</p>
-					<p>neutral {neutral}</p>
-					<p>bad {bad}</p>
-					<p>average: {(good - bad) / (good + neutral + bad)}</p>
-					<p>positive: {(good * 100) / (good + neutral + bad)}%</p>
+					<StatisticLine text="good" value={good} />
+					<StatisticLine text="neutral" value={neutral} />
+					<StatisticLine text="bad" value={bad} />
+					<StatisticLine text="average" value={(good - bad) / (good + neutral + bad)} />
+					<StatisticLine text="positive" value={(good * 100) / (good + neutral + bad)} modifier="%" />
 				</>
 			) : (
 				<>
@@ -27,6 +27,26 @@ const Statistics = ({ good, neutral, bad }: StatisticsProps) => {
 	);
 };
 
+interface ButtonProps {
+	text: string;
+	onClick: () => void;
+}
+
+const Button = ({ text, onClick }: ButtonProps) => <button onClick={onClick}>{text}</button>;
+
+interface StatisticLineProps {
+	text: string;
+	value: number;
+	modifier?: string;
+}
+
+const StatisticLine = ({ text, value, modifier }: StatisticLineProps) => (
+	<p>
+		{text} {value}
+		{modifier}
+	</p>
+);
+
 const App = () => {
 	// save clicks of each button to its own state
 	const [good, setGood] = useState(0);
@@ -36,9 +56,9 @@ const App = () => {
 	return (
 		<div>
 			<h1>give feedback</h1>
-			<button onClick={() => setGood(prev => prev + 1)}>good</button>
-			<button onClick={() => setNeutral(prev => prev + 1)}>neutral</button>
-			<button onClick={() => setBad(prev => prev + 1)}>bad</button>
+			<Button text="good" onClick={() => setGood(good + 1)} />
+			<Button text="neutral" onClick={() => setNeutral(neutral + 1)} />
+			<Button text="bad" onClick={() => setBad(bad + 1)} />
 			<Statistics good={good} neutral={neutral} bad={bad} />
 		</div>
 	);
