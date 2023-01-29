@@ -95,6 +95,8 @@ const Anecdote = () => {
 			<p>has {votes[selected]} votes</p>
 			<Button onClick={handleVote(selected)} text="vote" />
 			<Button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))} text="next anecdote" />
+			<h1>Anecdote with most votes</h1>
+			<p>{anecdotes[votes.indexOf(Math.max(...votes))]}</p>
 		</>
 	);
 };
