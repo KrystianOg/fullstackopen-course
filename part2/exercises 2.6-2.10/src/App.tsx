@@ -5,6 +5,7 @@ import type { Person } from "./types";
 function App() {
 	const [persons, setPersons] = useState<Person[]>([{ name: "Arto Hellas" }]);
 	const nameInputRef = useRef<HTMLInputElement>(null);
+	const numberInputRef = useRef<HTMLInputElement>(null);
 
 	// using ref because this way component does not rerender on every key press
 	const handleSubmit = (e: React.SyntheticEvent) => {
@@ -20,9 +21,11 @@ function App() {
 
 		const person = {
 			name: newName,
+			number: numberInputRef.current?.value,
 		};
 		setPersons(persons.concat(person));
 		nameInputRef.current.value = "";
+		numberInputRef.current!.value = "";
 	};
 
 	return (
@@ -33,12 +36,15 @@ function App() {
 					name: <input ref={nameInputRef} />
 				</div>
 				<div>
+					number: <input ref={numberInputRef} />
+				</div>
+				<div>
 					<button type="submit">add</button>
 				</div>
 			</form>
 			<h2>Numbers</h2>
 			{persons.map(person => (
-				<PersonComponent key={person.name} name={person.name} />
+				<PersonComponent key={person.name} person={person} />
 			))}
 		</div>
 	);

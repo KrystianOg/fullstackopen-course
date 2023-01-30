@@ -1,9 +1,14 @@
+import type { Person, Person as PersonType } from "../types";
 interface PersonProps {
-	name: string;
+	person: PersonType;
 }
 
-const Person = ({ name }: PersonProps) => {
-	return <div>{name}</div>;
+const Person = ({ person: { name, number } }: PersonProps) => {
+	return (
+		<div>
+			{name} {number}
+		</div>
+	);
 };
 
 export default Person;
