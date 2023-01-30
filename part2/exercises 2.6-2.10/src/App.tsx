@@ -11,8 +11,15 @@ function App() {
 		e.preventDefault();
 		if (!nameInputRef.current) return;
 
+		const newName = nameInputRef.current.value;
+
+		if (persons.find(person => person.name === newName)) {
+			alert(`${newName} is already added to phonebook`);
+			return;
+		}
+
 		const person = {
-			name: nameInputRef.current.value,
+			name: newName,
 		};
 		setPersons(persons.concat(person));
 		nameInputRef.current.value = "";
