@@ -7,7 +7,7 @@ type TotalProps = {
 const Total = ({ parts }: TotalProps) => {
 	const total = parts.reduce((acc, { exercises }) => acc + exercises, 0);
 
-	return <p>Number of exercises {total}</p>;
+	return <strong>total of {total} exercises</strong>;
 };
 
 export default Total;
