@@ -1,4 +1,4 @@
-import type { Person, Person as PersonType } from "../types";
+import type { Person as PersonType } from "../types";
 interface PersonProps {
 	person: PersonType;
 }
